@@ -44,8 +44,8 @@ function storeValue(value) {
     }
     else {
         operator === '' 
-            ? (firstNumber = parseFloat(`${firstNumber}${value}`)) 
-            : (secondNumber = parseFloat(`${secondNumber}${value}`));
+            ? (firstNumber += value) 
+            : (secondNumber += value);
         updateDisplay();
         return;
     }
@@ -55,10 +55,10 @@ function calculateResult() {
     let resultSpan = document.querySelector('#result');
     let result;
 
-    if (operator !== '' && !isNaN(secondNumber)) {
-        result = operate(operator, firstNumber, secondNumber);
+    if (operator !== '' && !isNaN(parseFloat(secondNumber))) {
+        result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
         resultSpan.innerHTML = result;
-        firstNumber = result;
+        firstNumber = result.toString();
         secondNumber = '';
         operator = '';
     } else {
