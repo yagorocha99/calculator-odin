@@ -1,6 +1,7 @@
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
+
 const operators = {
     '+': (a,b) => a + b,
     '-': (a,b) => a - b,
@@ -9,7 +10,7 @@ const operators = {
 }
 
 function updateDisplay() {
-    document.querySelector('#result').innerHTML = `${firstNumber} ${operator} ${secondNumber || ''}`;
+    document.querySelector('#result').textContent = `${firstNumber} ${operator} ${secondNumber || ''}`;
 }
 
 function storeValue(value) {
@@ -17,7 +18,6 @@ function storeValue(value) {
         firstNumber = '';
         secondNumber = '';
         operator = '';
-        document.querySelector('#result').innerHTML = '';
         return;
     }
     if (value === '='){
@@ -40,16 +40,19 @@ function storeValue(value) {
             : (secondNumber.includes('.') 
                 ? null 
                 : (secondNumber += '.'));
-        updateDisplay();    
-    }
-    else {
-        operator === '' 
-            ? (firstNumber += value) 
-            : (secondNumber += value);
-        updateDisplay();
+        updateDisplay();   
         return;
     }
+    if (operator === '') {
+        firstNumber += value;
+    } 
+    else {
+        secondNumber += value;
+    }
+    updateDisplay();
+    return;
 }
+
 
 function calculateResult() {
     let resultSpan = document.querySelector('#result');
@@ -61,9 +64,14 @@ function calculateResult() {
         firstNumber = result.toString();
         secondNumber = '';
         operator = '';
-    } else {
+    } 
+    else {
         resultSpan.innerHTML = 'Invalid input';
     }
+
+    firstNumber = '';
+    secondNumber = '';
+    operator = '';
 }
 
 function operate(operator, a, b){
