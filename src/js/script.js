@@ -1,11 +1,17 @@
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
-
+const operators = {
+    '+': (a,b) => a + b,
+    '-': (a,b) => a - b,
+    '/': (a,b) => a / b,
+    '*': (a,b) => a * b,
+}
 
 function updateDisplay() {
     document.querySelector('#result').innerHTML = `${firstNumber} ${operator} ${secondNumber || ''}`;
 }
+
 function storeValue(value) {
     if (value === 'C'){
         firstNumber = '';
@@ -26,8 +32,20 @@ function storeValue(value) {
         updateDisplay();
         return;
     }
+    if (value === '.') {
+        operator === '' 
+            ? (firstNumber.includes('.') 
+                ? null 
+                : (firstNumber += '.')) 
+            : (secondNumber.includes('.') 
+                ? null 
+                : (secondNumber += '.'));
+        updateDisplay();    
+    }
     else {
-        operator === '' ? (firstNumber = parseFloat(`${firstNumber}${value}`)) : (secondNumber = parseFloat(`${secondNumber}${value}`));
+        operator === '' 
+            ? (firstNumber = parseFloat(`${firstNumber}${value}`)) 
+            : (secondNumber = parseFloat(`${secondNumber}${value}`));
         updateDisplay();
         return;
     }
@@ -48,33 +66,10 @@ function calculateResult() {
     }
 }
 
-function add (a, b){
-    return a + b;
-}
-
-function subtract (a, b){
-    return a - b;
-};
-
-function divide (a, b){
-    return a / b;
-};
-
-function multiply (a, b){
-    return a * b;
-};
-
 function operate(operator, a, b){
-    switch(operator){
-        case '+':
-            return add(a, b);
-        case '-':
-            return subtract(a, b);
-        case '/':
-            return divide(a, b);
-        case '*':
-            return multiply(a, b);
-        default:
-            return 'Invalid operator';
+    if(operators.hasOwnProperty(operator)){
+        return operators[operator](a,b);
+    } {
+        return 'Invalid operator'
     }
 }
