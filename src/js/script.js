@@ -1,6 +1,7 @@
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
+let resultCalculated = false;
 
 const operators = {
     '+': (a,b) => a + b,
@@ -18,6 +19,7 @@ function storeValue(value) {
         firstNumber = '';
         secondNumber = '';
         operator = '';
+        resultCalculated = false
         return;
     }
     if (value === '='){
@@ -43,6 +45,11 @@ function storeValue(value) {
         updateDisplay();   
         return;
     }
+    if (resultCalculated && operator === '') {
+        firstNumber = '';
+        secondNumber = '';
+        resultCalculated = false;
+    }
     if (operator === '') {
         firstNumber += value;
     } 
@@ -64,14 +71,11 @@ function calculateResult() {
         firstNumber = result.toString();
         secondNumber = '';
         operator = '';
+        resultCalculated = true;
     } 
     else {
         resultSpan.innerHTML = 'Invalid input';
     }
-
-    firstNumber = '';
-    secondNumber = '';
-    operator = '';
 }
 
 function operate(operator, a, b){
