@@ -2,7 +2,6 @@ let firstNumber = '';
 let secondNumber = '';
 let operator = '';
 let resultCalculated = false;
-
 const operators = {
     '+': (a,b) => a + b,
     '-': (a,b) => a - b,
@@ -19,7 +18,8 @@ function storeValue(value) {
         firstNumber = '';
         secondNumber = '';
         operator = '';
-        resultCalculated = false
+        resultCalculated = false;
+        updateDisplay();
         return;
     }
     if (value === '='){
@@ -73,15 +73,97 @@ function calculateResult() {
         operator = '';
         resultCalculated = true;
     } 
+
     else {
         resultSpan.innerHTML = 'Invalid input';
     }
 }
 
+
 function operate(operator, a, b){
     if(operators.hasOwnProperty(operator)){
         return operators[operator](a,b);
-    } {
-        return 'Invalid operator'
     }
 }
+
+function deleteLastDigit(){
+    if (operator === '') {
+        firstNumber = firstNumber.slice(0, -1);
+    } else{
+        secondNumber = secondNumber.slice(0, -1);
+    }
+    updateDisplay();
+}
+
+document.addEventListener(
+    "keydown", (event) => {
+        let keyName = event.key;
+
+        if(/[0-9]$/.test(keyName)){
+            storeValue(keyName);
+        }
+        const keyMappings = {
+            '+' : '+',
+            '=' : '=',
+            '-' : '-',
+            '*' : '*',
+            '/' : '/',
+            'c' : 'C',
+            'Enter' : calculateResult,
+            'Backspace' : deleteLastDigit,
+        };
+
+        const mappedValue = keyMappings[keyName];
+
+        if(mappedValue === undefined){
+            return;
+        }
+
+        if (typeof mappedValue === 'function') {
+            mappedValue();
+            return;
+        }
+
+        storeValue(mappedValue);
+
+        if (keyName === '/') {
+            event.preventDefault();
+        }
+    }
+)
+
+
+/*document.addEventListener(
+    "keydown", (event) => {
+        let keyName = event.key;
+
+        if(/[0-9]$/.test(keyName)){
+            storeValue(keyName);
+        }
+        else {
+            const keyMappings = {
+                '+' : '+',
+                '=' : '=',
+                '-' : '-',
+                '*' : '*',
+                '/' : '/',
+                'c' : 'C',
+                'Enter' : calculateResult,
+                'Backspace' : deleteLastDigit
+            };
+
+            const mappedValue = keyMappings[keyName];
+
+            if(mappedValue !== undefined){
+                if (typeof mappedValue === 'function') {
+                    mappedValue();
+                } else {
+                    storeValue(mappedValue);
+                }
+                if (keyName === '/') {
+                    event.preventDefault();
+                }
+            }
+        }
+    }
+)*/
