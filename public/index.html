@@ -31,13 +31,14 @@
             <button type="button" id="number-7" value="7" onclick="storeValue('7')">7</button>
             <button type="button" id="number-8" value="8" onclick="storeValue('8')">8</button>
             <button type="button" id="number-9" value="9" onclick="storeValue('9')">9</button>
-            <button value="-" onclick="storeValue('-')">-</button>
-            <button value="=" onclick="calculateResult()">=</button>
+            <button type="button" value="-" onclick="storeValue('-')">-</button>
+            <button type="button" value="=" onclick="calculateResult()">=</button>
         </div>
         <div>
             <button type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
             <button type="button" value="." onclick="storeValue('.')">.</button>
-            <button type="button" value="DEL" onclick="deleteLastDigit()">DEL</button>
+            <button type="button" value="DEL" onclick="deleteLastDigit()">BS</button>
+            <button value="+/-" onclick="toggleSign()">+/-</button>
         </div>
     </div>
 
