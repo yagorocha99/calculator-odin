@@ -32,8 +32,9 @@ function calculateResult() {
 
     if (operator !== '' && !isNaN(parseFloat(secondNumber))) {
         result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+        result = parseFloat(result.toFixed(4)).toString();
         resultSpan.innerHTML = result;
-        firstNumber = result.toString();
+        firstNumber = result;
         secondNumber = '';
         operator = '';
         resultCalculated = true;
@@ -43,6 +44,7 @@ function calculateResult() {
         resultSpan.innerHTML = 'Invalid input';
     }
 }
+
 
 function handleOperator(value) {
     if (value === '=' || (value in operators && secondNumber !== '')) {
@@ -155,13 +157,15 @@ function deleteLastDigit(){
 }
 
 function toggleSign() {
-    if (operator === '') {
+    if (operator === '' && firstNumber !== '') {
         firstNumber = (parseFloat(firstNumber) * -1).toString();
-    } else if (secondNumber !== '') {
+    }
+    if (secondNumber !== '') {
         secondNumber = (parseFloat(secondNumber) * -1).toString();
     }
     updateDisplay();
 }
+
 
 document.addEventListener(
     "keydown", (event) => {
