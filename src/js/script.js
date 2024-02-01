@@ -32,18 +32,19 @@ function calculateResult() {
 
     if (operator !== '' && !isNaN(parseFloat(secondNumber))) {
         result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-        result = parseFloat(result.toFixed(4)).toString();
+        if (result.toString().length > 16) {
+            result = result.toExponential();
+        }
         resultSpan.innerHTML = result;
         firstNumber = result;
         secondNumber = '';
         operator = '';
         resultCalculated = true;
-    } 
-
-    else {
-        resultSpan.innerHTML = 'Invalid input';
+    } else {
+        resultSpan.innerHTML = 'Input inválido';
     }
 }
+
 
 
 function handleOperator(value) {
@@ -56,7 +57,7 @@ function handleOperator(value) {
         resultCalculated = false;
     }
 
-    if (operator !== '' && secondNumber !== '') {
+    if (operator !== '' && secondNumber !== '' && secondNumber !== '.') {
         calculateResult();
         operator = value;
         numberEntered = false;
@@ -66,7 +67,7 @@ function handleOperator(value) {
         operator = value;
     }
 
-    if (firstNumber !== '') {
+    if (firstNumber !== '' && firstNumber !== '.') {
         operator = value;
     }
 
@@ -74,14 +75,28 @@ function handleOperator(value) {
 }
 
 
+function checkLength(number, maxDigits) {
+    if (number.replace('.', '').length > maxDigits) {
+        return false;
+    }
+    return true;
+}
+
 function handleNumber(value) {
     numberEntered = true;
-    if (operator === '') {
-        firstNumber += value;
-    } 
+    let currentNumber = operator === '' ? firstNumber : secondNumber;
+    currentNumber += value;
 
-    else {
-        secondNumber += value;
+    if (operator === '') {
+        if (!checkLength(currentNumber, 16)) {
+            return;
+        }
+        firstNumber = currentNumber;
+    } else {
+        if (!checkLength(currentNumber, 16)) {
+            return;
+        }
+        secondNumber = currentNumber;
     }
 
     updateDisplay();
@@ -94,17 +109,20 @@ function handleDecimal() {
     }
 
     if (operator === '') {
+        if (!checkLength(currentNumber, 16)) {
+            return;
+        }
         firstNumber = currentNumber;
-    } 
-
-    else {
+    } else {
+        if (!checkLength(currentNumber, 16)) {
+            return;
+        }
         secondNumber = currentNumber;
     }
     
     numberEntered = true;
     updateDisplay();   
 }
-
 
 function resetCalculator() {
     firstNumber = '';
@@ -183,6 +201,7 @@ document.addEventListener(
             'c' : 'C',
             'Enter' : calculateResult,
             'Backspace' : deleteLastDigit,
+            'Shift' : toggleSign,
         };
 
         const mappedValue = keyMappings[keyName];
