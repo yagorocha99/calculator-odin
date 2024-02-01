@@ -14,10 +14,14 @@
             <br><br>
         </div>
         <div>
+            <button type="button" value="DEL" onclick="deleteLastDigit()">BS</button>
+            <button value="+/-" onclick="toggleSign()">+/-</button>
+            <button id="clear" value="C" onclick="storeValue('C')">C</button>
+        </div>
+        <div>
             <button type="button" id="number-1" value="1" onclick="storeValue('1')">1</button>
             <button type="button" id="number-2" value="2" onclick="storeValue('2')">2</button>
             <button type="button" id="number-3" value="3" onclick="storeValue('3')">3</button>
-            <button id="clear" value="C" onclick="storeValue('C')">C</button>
             <button value=" *" onclick="storeValue('*')">*</button>
         </div>
         <div>
@@ -25,20 +29,19 @@
             <button type="button" id="number-5" value="5" onclick="storeValue('5')">5</button>
             <button type="button" id="number-6" value="6" onclick="storeValue('6')">6</button>
             <button value="+" onclick="storeValue('+')">+</button>
-            <button value="/" onclick="storeValue('/')">/</button>
         </div>
         <div>
             <button type="button" id="number-7" value="7" onclick="storeValue('7')">7</button>
             <button type="button" id="number-8" value="8" onclick="storeValue('8')">8</button>
             <button type="button" id="number-9" value="9" onclick="storeValue('9')">9</button>
             <button type="button" value="-" onclick="storeValue('-')">-</button>
-            <button type="button" value="=" onclick="calculateResult()">=</button>
+            
         </div>
         <div>
-            <button type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
             <button type="button" value="." onclick="storeValue('.')">.</button>
-            <button type="button" value="DEL" onclick="deleteLastDigit()">BS</button>
-            <button value="+/-" onclick="toggleSign()">+/-</button>
+            <button type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
+            <button type="button" value="=" onclick="calculateResult()">=</button>
+            <button value="/" onclick="storeValue('/')">/</button>
         </div>
     </div>
 

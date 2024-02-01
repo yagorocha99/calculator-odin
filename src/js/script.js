@@ -157,7 +157,7 @@ function deleteLastDigit(){
 }
 
 function toggleSign() {
-    if (operator === '' && firstNumber !== '') {
+    if (operator === '' && firstNumber !== '' && firstNumber !== '.') {
         firstNumber = (parseFloat(firstNumber) * -1).toString();
     }
     if (secondNumber !== '') {
