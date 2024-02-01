@@ -160,7 +160,7 @@ function toggleSign() {
     if (operator === '' && firstNumber !== '' && firstNumber !== '.') {
         firstNumber = (parseFloat(firstNumber) * -1).toString();
     }
-    if (secondNumber !== '') {
+    if (secondNumber !== '' && secondNumber !== '.') {
         secondNumber = (parseFloat(secondNumber) * -1).toString();
     }
     updateDisplay();
