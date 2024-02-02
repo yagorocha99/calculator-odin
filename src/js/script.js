@@ -41,7 +41,7 @@ function calculateResult() {
         operator = '';
         resultCalculated = true;
     } else {
-        resultSpan.innerHTML = 'Input inválido';
+        resultSpan.innerHTML = 'Invalid input';
     }
 }
 
