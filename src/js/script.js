@@ -175,14 +175,25 @@ function deleteLastDigit(){
 }
 
 function toggleSign() {
+    const toggleSpecialCase = (num) => {
+        const specialNumber = '9999999999999999';
+        const isSpecialCase = num === specialNumber || num === '-' + specialNumber;
+
+        return isSpecialCase ? (num.startsWith('-') ? num.slice(1) : '-' + num) : (-parseFloat(num)).toString();
+    };
+
     if (operator === '' && firstNumber !== '' && firstNumber !== '.') {
-        firstNumber = (parseFloat(firstNumber) * -1).toString();
+        firstNumber = toggleSpecialCase(firstNumber);
     }
+
     if (secondNumber !== '' && secondNumber !== '.') {
-        secondNumber = (parseFloat(secondNumber) * -1).toString();
+        secondNumber = toggleSpecialCase(secondNumber);
     }
+
     updateDisplay();
 }
+
+
 
 
 document.addEventListener(
