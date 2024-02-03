@@ -60,7 +60,15 @@ function calculateResult() {
     }
 
     result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-    
+
+    if (!isFinite(result)) {
+        document.querySelector('#result').innerHTML = 'Maximum Value';
+        setTimeout(() => {
+            resetCalculator();
+        }, 3000);
+        return;
+    }
+
     if (result.toString().length > 15) {
         result = result.toExponential();
     }
@@ -71,6 +79,7 @@ function calculateResult() {
     operator = '';
     resultCalculated = true;
 }
+
 
 function handleOperator(value) {
     
@@ -229,34 +238,33 @@ function deleteLastDigit(){
 }
 
 function toggleSign() {
-    let isExponential = (num) => /^-?\d+\.?\d*e[\+\-]\d+$/i.test(num);
+    let currentNumber = operator === '' ? firstNumber : secondNumber;
 
-    if (operator === '' && firstNumber !== '' && !isExponential(firstNumber) && firstNumber !== '-') {
-        firstNumber = (parseFloat(firstNumber) * -1).toString();
+    let isExponential = /^-?\d+\.?\d*e[\+\-]\d+$/i.test(currentNumber);
+
+    if (isExponential) {
+        currentNumber = currentNumber.startsWith('-') ? currentNumber.slice(1) : '-' + currentNumber;
     }
 
-    if (operator !== '' && secondNumber !== '' && !isExponential(secondNumber) && secondNumber !== '-') {
-        secondNumber = (parseFloat(secondNumber) * -1).toString();
-    }
-     
-    if (operator === '' && isExponential(firstNumber)) {
-        firstNumber = firstNumber.startsWith('-') ? firstNumber.slice(1) : '-' + firstNumber;
+    if (currentNumber !== '' && currentNumber !== '-') {
+        currentNumber = (parseFloat(currentNumber) * -1).toString();
     }
 
-    if (operator !== '' && isExponential(secondNumber)) {
-        secondNumber = secondNumber.startsWith('-') ? secondNumber.slice(1) : '-' + secondNumber;
+    if (currentNumber === '' || currentNumber === '-') {
+        currentNumber = '-';
     }
 
-    if (operator === '' && (firstNumber === '' || firstNumber === '-')) {
-        firstNumber = '-';
-    }
-
-    if (operator !== '' && (secondNumber === '' || secondNumber === '-')) {
-        secondNumber = '-';
+    if (operator === '') {
+        firstNumber = currentNumber;
+    } 
+    
+    if (operator !== ''){
+        secondNumber = currentNumber;
     }
 
     updateDisplay();
 }
+
 
 document.addEventListener(
     "keydown", (event) => {
