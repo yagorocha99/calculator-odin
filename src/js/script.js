@@ -30,21 +30,24 @@ function calculateResult() {
         operator = '';
     }
 
-    if (operator !== '' && !isNaN(parseFloat(secondNumber))) {
-        result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
-        if (result.toString().length > 16) {
-            result = result.toExponential();
-        }
-        resultSpan.innerHTML = result;
-        firstNumber = result;
-        secondNumber = '';
-        operator = '';
-        resultCalculated = true;
-    } else {
+    if (operator === '' || isNaN(parseFloat(secondNumber))) {
         resultSpan.innerHTML = 'Invalid input';
+        setTimeout(() => {
+            updateDisplay();
+        }, 2000);
+        return;
     }
-}
 
+    result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    if (result.toString().length > 15) {
+        result = result.toExponential();
+    }
+    resultSpan.innerHTML = result;
+    firstNumber = result;
+    secondNumber = '';
+    operator = '';
+    resultCalculated = true;
+}
 
 
 function handleOperator(value) {
@@ -76,7 +79,7 @@ function handleOperator(value) {
 
 
 function checkLength(number, maxDigits) {
-    if (number.replace('.', '').length > maxDigits) {
+    if (number.replace('.', '', '-').length > maxDigits) {
         return false;
     }
     return true;
@@ -87,20 +90,20 @@ function handleNumber(value) {
     let currentNumber = operator === '' ? firstNumber : secondNumber;
     currentNumber += value;
 
+    if (!checkLength(currentNumber, 15)) {
+        return;
+    }
+
     if (operator === '') {
-        if (!checkLength(currentNumber, 16)) {
-            return;
-        }
         firstNumber = currentNumber;
-    } else {
-        if (!checkLength(currentNumber, 16)) {
-            return;
-        }
+    } 
+    if (operator !== '') {
         secondNumber = currentNumber;
     }
 
     updateDisplay();
 }
+
 
 function handleDecimal() {
     let currentNumber = operator === '' ? firstNumber : secondNumber;
@@ -108,21 +111,21 @@ function handleDecimal() {
         currentNumber += '.';
     }
 
+    if (!checkLength(currentNumber, 15)) {
+        return;
+    }
+
     if (operator === '') {
-        if (!checkLength(currentNumber, 16)) {
-            return;
-        }
         firstNumber = currentNumber;
-    } else {
-        if (!checkLength(currentNumber, 16)) {
-            return;
-        }
+    } 
+    if (operator !== '') {
         secondNumber = currentNumber;
     }
     
     numberEntered = true;
     updateDisplay();   
 }
+
 
 function resetCalculator() {
     firstNumber = '';
@@ -147,54 +150,46 @@ function storeValue(value) {
         return;
     }
 
-    if (value >= '0' && value <= '9') {
-        if (resultCalculated) {
-            resetCalculator();
-        }
-        handleNumber(value);
-    }
-
     if (value === '.') {
         handleDecimal();
         return;
     }
 
+    if (value < '0' || value > '9') {
+        return;
+    }
+
+    if (resultCalculated) {
+        resetCalculator();
+    }
+
     if (resultCalculated && operator === '') {
         resetCalculator();
     }
+
+    handleNumber(value);
 }
+
 
 function deleteLastDigit(){
     if (operator === '') {
         firstNumber = firstNumber.slice(0, -1);
     } 
-    else{
+    if (operator !== ''){
         secondNumber = secondNumber.slice(0, -1);
     }
     updateDisplay();
 }
 
 function toggleSign() {
-    const toggleSpecialCase = (num) => {
-        const specialNumber = '9999999999999999';
-        const isSpecialCase = num === specialNumber || num === '-' + specialNumber;
-
-        return isSpecialCase ? (num.startsWith('-') ? num.slice(1) : '-' + num) : (-parseFloat(num)).toString();
-    };
-
-    if (operator === '' && firstNumber !== '' && firstNumber !== '.') {
-        firstNumber = toggleSpecialCase(firstNumber);
+    if (operator === '') {
+        firstNumber = -firstNumber;
+    } 
+    if (operator !== ''){
+        secondNumber = -secondNumber;
     }
-
-    if (secondNumber !== '' && secondNumber !== '.') {
-        secondNumber = toggleSpecialCase(secondNumber);
-    }
-
     updateDisplay();
 }
-
-
-
 
 document.addEventListener(
     "keydown", (event) => {
