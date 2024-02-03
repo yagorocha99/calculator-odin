@@ -16,7 +16,11 @@ function updateDisplay() {
 
 function operate(operator, a, b){
     if(operator === '/' && b === 0){
-        return 0;
+        document.querySelector('#result').innerHTML = 'Invalid input';
+        setTimeout(() => {
+            resetCalculator();
+        }, 2000);
+        return;
     }
 
     if(operators.hasOwnProperty(operator)){
