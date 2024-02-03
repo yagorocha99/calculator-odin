@@ -11,10 +11,21 @@ const operators = {
 }
 
 function updateDisplay() {
+    
+    if (firstNumber === '-') {
+        firstNumber = '';
+    }
+    
+    if (secondNumber === '-') {
+        secondNumber = '';
+    }
+
     document.querySelector('#result').textContent = `${firstNumber} ${operator} ${secondNumber || ''}`;
 }
 
+
 function operate(operator, a, b){
+    
     if(operator === '/' && b === 0){
         document.querySelector('#result').innerHTML = 'Invalid input';
         setTimeout(() => {
@@ -24,9 +35,11 @@ function operate(operator, a, b){
     }
 
     if(operators.hasOwnProperty(operator)){
-        return operators[operator](a,b);
+        const result = operators[operator](a, b);
+        return result;
     }
 }
+
 
 function calculateResult() {
     let resultSpan = document.querySelector('#result');
@@ -47,9 +60,11 @@ function calculateResult() {
     }
 
     result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+    
     if (result.toString().length > 15) {
         result = result.toExponential();
     }
+
     resultSpan.innerHTML = result;
     firstNumber = result;
     secondNumber = '';
@@ -58,6 +73,7 @@ function calculateResult() {
 }
 
 function handleOperator(value) {
+    
     if (value === '=' || (value in operators && secondNumber !== '')) {
         calculateResult();
         return;
@@ -85,18 +101,26 @@ function handleOperator(value) {
 }
 
 function checkLength(number, maxDigits) {
+    
     if (number.startsWith('-')) {
         number = number.slice(1);
     }
+
     if (number.replace('.', '').length > maxDigits) {
         return false;
     }
+
     return true;
 }
 
 function handleNumber(value) {
     numberEntered = true;
     let currentNumber = operator === '' ? firstNumber : secondNumber;
+
+    if (currentNumber === '-') {
+        currentNumber = '';
+    }
+
     currentNumber += value;
 
     if (!checkLength(currentNumber, 15)) {
@@ -105,7 +129,8 @@ function handleNumber(value) {
 
     if (operator === '') {
         firstNumber = currentNumber;
-    } 
+    }
+
     if (operator !== '') {
         secondNumber = currentNumber;
     }
@@ -115,9 +140,11 @@ function handleNumber(value) {
 
 function handleDecimal() {
     let currentNumber = operator === '' ? firstNumber : secondNumber;
+    
     if (currentNumber === '' || currentNumber === '-') {
         currentNumber += '0.';
     }
+
     if (!currentNumber.includes('.')) {
         currentNumber += '.';
     }
@@ -128,7 +155,8 @@ function handleDecimal() {
 
     if (operator === '') {
         firstNumber = currentNumber;
-    } 
+    }
+
     if (operator !== '') {
         secondNumber = currentNumber;
     }
@@ -183,38 +211,50 @@ function storeValue(value) {
 function deleteLastDigit(){
     if (operator === '' && firstNumber === '-') {
         return;
-    } 
+    }
+
     if (operator !== '' && secondNumber === '-') {
         return;
     }
+
     if (operator === '' && firstNumber !== '') {
         firstNumber = firstNumber.slice(0, -1);
-    } 
+    }
+
     if (operator !== '' && secondNumber !== ''){
         secondNumber = secondNumber.slice(0, -1);
     }
+
     updateDisplay();
 }
 
 function toggleSign() {
-    if (operator === '' && firstNumber === '') {
-        firstNumber = '-';
-    }
-    if (operator !== '' && secondNumber === '') {
-        secondNumber = '-';
-    }
-    if (operator === '' && firstNumber === '-') {
-        firstNumber = '';
-    }
-    if (operator !== '' && secondNumber === '-') {
-        secondNumber = '';
-    }
-    if (operator === '' && firstNumber !== '.' && firstNumber !== '-' && firstNumber !== '') {
+    let isExponential = (num) => /^-?\d+\.?\d*e[\+\-]\d+$/i.test(num);
+
+    if (operator === '' && firstNumber !== '' && !isExponential(firstNumber) && firstNumber !== '-') {
         firstNumber = (parseFloat(firstNumber) * -1).toString();
     }
-    if (operator !== '' && secondNumber !== '.' && secondNumber !== '-' && secondNumber !== '') {
+
+    if (operator !== '' && secondNumber !== '' && !isExponential(secondNumber) && secondNumber !== '-') {
         secondNumber = (parseFloat(secondNumber) * -1).toString();
     }
+     
+    if (operator === '' && isExponential(firstNumber)) {
+        firstNumber = firstNumber.startsWith('-') ? firstNumber.slice(1) : '-' + firstNumber;
+    }
+
+    if (operator !== '' && isExponential(secondNumber)) {
+        secondNumber = secondNumber.startsWith('-') ? secondNumber.slice(1) : '-' + secondNumber;
+    }
+
+    if (operator === '' && (firstNumber === '' || firstNumber === '-')) {
+        firstNumber = '-';
+    }
+
+    if (operator !== '' && (secondNumber === '' || secondNumber === '-')) {
+        secondNumber = '-';
+    }
+
     updateDisplay();
 }
 
