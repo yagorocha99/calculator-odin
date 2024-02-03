@@ -15,6 +15,10 @@ function updateDisplay() {
 }
 
 function operate(operator, a, b){
+    if(operator === '/' && b === 0){
+        return 0;
+    }
+
     if(operators.hasOwnProperty(operator)){
         return operators[operator](a,b);
     }
@@ -49,7 +53,6 @@ function calculateResult() {
     resultCalculated = true;
 }
 
-
 function handleOperator(value) {
     if (value === '=' || (value in operators && secondNumber !== '')) {
         calculateResult();
@@ -70,16 +73,18 @@ function handleOperator(value) {
         operator = value;
     }
 
-    if (firstNumber !== '' && firstNumber !== '.') {
+    if (firstNumber !== '' && firstNumber !== '.' && firstNumber !== '-') {
         operator = value;
     }
 
     updateDisplay();
 }
 
-
 function checkLength(number, maxDigits) {
-    if (number.replace('.', '', '-').length > maxDigits) {
+    if (number.startsWith('-')) {
+        number = number.slice(1);
+    }
+    if (number.replace('.', '').length > maxDigits) {
         return false;
     }
     return true;
@@ -104,9 +109,11 @@ function handleNumber(value) {
     updateDisplay();
 }
 
-
 function handleDecimal() {
     let currentNumber = operator === '' ? firstNumber : secondNumber;
+    if (currentNumber === '' || currentNumber === '-') {
+        currentNumber += '0.';
+    }
     if (!currentNumber.includes('.')) {
         currentNumber += '.';
     }
@@ -125,7 +132,6 @@ function handleDecimal() {
     numberEntered = true;
     updateDisplay();   
 }
-
 
 function resetCalculator() {
     firstNumber = '';
@@ -170,23 +176,40 @@ function storeValue(value) {
     handleNumber(value);
 }
 
-
 function deleteLastDigit(){
-    if (operator === '') {
+    if (operator === '' && firstNumber === '-') {
+        return;
+    } 
+    if (operator !== '' && secondNumber === '-') {
+        return;
+    }
+    if (operator === '' && firstNumber !== '') {
         firstNumber = firstNumber.slice(0, -1);
     } 
-    if (operator !== ''){
+    if (operator !== '' && secondNumber !== ''){
         secondNumber = secondNumber.slice(0, -1);
     }
     updateDisplay();
 }
 
 function toggleSign() {
-    if (operator === '') {
-        firstNumber = -firstNumber;
-    } 
-    if (operator !== ''){
-        secondNumber = -secondNumber;
+    if (operator === '' && firstNumber === '') {
+        firstNumber = '-';
+    }
+    if (operator !== '' && secondNumber === '') {
+        secondNumber = '-';
+    }
+    if (operator === '' && firstNumber === '-') {
+        firstNumber = '';
+    }
+    if (operator !== '' && secondNumber === '-') {
+        secondNumber = '';
+    }
+    if (operator === '' && firstNumber !== '.' && firstNumber !== '-' && firstNumber !== '') {
+        firstNumber = (parseFloat(firstNumber) * -1).toString();
+    }
+    if (operator !== '' && secondNumber !== '.' && secondNumber !== '-' && secondNumber !== '') {
+        secondNumber = (parseFloat(secondNumber) * -1).toString();
     }
     updateDisplay();
 }
