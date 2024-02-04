@@ -6,42 +6,58 @@
     <link rel="stylesheet" href="./output.css">
     <title>Document</title>
 </head>
-<body>
+<body class="bg-slate-600 text-center text-white">
     <h1>Calculator</h1>
-    <div>
-        <div><br>
-            <span id="result"></span>
+    <div class="container mx-auto justify-center">
+        <div class="bg-white text-black w-1/3 mx-auto"><br>
+            <span id="errorMessage" class="text-lg"></span>
+            <span id="firstNumberDisplay" class="text-sm"></span>
+            <br>
+            <span id="operatorDisplay" class="text-sm"></span>
+            <br>
+            <span id="secondNumberDisplay" class="text-sm"></span>
             <br><br>
         </div>
-        <div>
-            <button type="button" value="DEL" onclick="deleteLastDigit()">BS</button>
-            <button value="+/-" onclick="toggleSign()">+/-</button>
-            <button id="clear" value="C" onclick="storeValue('C')">C</button>
-        </div>
-        <div>
-            <button type="button" id="number-1" value="1" onclick="storeValue('1')">1</button>
-            <button type="button" id="number-2" value="2" onclick="storeValue('2')">2</button>
-            <button type="button" id="number-3" value="3" onclick="storeValue('3')">3</button>
-            <button value=" *" onclick="storeValue('*')">*</button>
-        </div>
-        <div>
-            <button type="button" id="number-4" value="4" onclick="storeValue('4')">4</button>
-            <button type="button" id="number-5" value="5" onclick="storeValue('5')">5</button>
-            <button type="button" id="number-6" value="6" onclick="storeValue('6')">6</button>
-            <button value="+" onclick="storeValue('+')">+</button>
-        </div>
-        <div>
-            <button type="button" id="number-7" value="7" onclick="storeValue('7')">7</button>
-            <button type="button" id="number-8" value="8" onclick="storeValue('8')">8</button>
-            <button type="button" id="number-9" value="9" onclick="storeValue('9')">9</button>
-            <button type="button" value="-" onclick="storeValue('-')">-</button>
+        <div class="grid grid-cols-4">
+            <button class="col-span-2 rounded-full py-3 px-6 bg-slate-400" 
+            id="clear" value="C" onclick="storeValue('C')">AC</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" value="DEL" onclick="deleteLastDigit()">BS</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            value="/" onclick="storeValue('/')">/</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-2" value="2" onclick="storeValue('2')">2</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-1" value="1" onclick="storeValue('1')">1</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-3" value="3" onclick="storeValue('3')">3</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            value=" *" onclick="storeValue('*')">*</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-4" value="4" onclick="storeValue('4')">4</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-5" value="5" onclick="storeValue('5')">5</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-6" value="6" onclick="storeValue('6')">6</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            value="+" onclick="storeValue('+')">+</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-7" value="7" onclick="storeValue('7')">7</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-8" value="8" onclick="storeValue('8')">8</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-9" value="9" onclick="storeValue('9')">9</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" value="-" onclick="storeValue('-')">-</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" value="." onclick="storeValue('.')">.</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            value="+/-" onclick="toggleSign()">+/-</button>
+            <button class="rounded-full py-3 px-6 bg-slate-400" 
+            type="button" value="=" onclick="calculateResult()">=</button>
             
-        </div>
-        <div>
-            <button type="button" value="." onclick="storeValue('.')">.</button>
-            <button type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
-            <button type="button" value="=" onclick="calculateResult()">=</button>
-            <button value="/" onclick="storeValue('/')">/</button>
         </div>
     </div>
 

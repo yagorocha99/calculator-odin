@@ -11,7 +11,6 @@ const operators = {
 }
 
 function updateDisplay() {
-    
     if (firstNumber === '-') {
         firstNumber = '';
     }
@@ -20,8 +19,11 @@ function updateDisplay() {
         secondNumber = '';
     }
 
-    document.querySelector('#result').textContent = `${firstNumber} ${operator} ${secondNumber || ''}`;
+    document.querySelector('#firstNumberDisplay').textContent = `${firstNumber}`;
+    document.querySelector('#operatorDisplay').textContent = `${operator}`;
+    document.querySelector('#secondNumberDisplay').textContent = `${secondNumber || ''}`;
 }
+
 
 
 function operate(operator, a, b){
@@ -62,7 +64,10 @@ function calculateResult() {
     result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
 
     if (!isFinite(result)) {
-        document.querySelector('#result').innerHTML = 'Maximum Value';
+        document.querySelector('#firstNumberDisplay').textContent = '';
+        document.querySelector('#operatorDisplay').textContent = '';
+        document.querySelector('#secondNumberDisplay').textContent = '';
+        document.querySelector('#errorMessage').textContent = 'Maximum Value';
         setTimeout(() => {
             resetCalculator();
         }, 3000);
@@ -73,7 +78,10 @@ function calculateResult() {
         result = result.toExponential();
     }
 
-    resultSpan.innerHTML = result;
+    document.querySelector('#firstNumberDisplay').textContent = `${firstNumber} ${operator} ${secondNumber}`;
+    document.querySelector('#operatorDisplay').textContent = '=';
+    document.querySelector('#secondNumberDisplay').textContent = result;
+    document.querySelector('#secondNumberDisplay').classList.remove('text-sm');
     firstNumber = result;
     secondNumber = '';
     operator = '';
@@ -179,8 +187,10 @@ function resetCalculator() {
     secondNumber = '';
     operator = '';
     resultCalculated = false;
+    document.querySelector('#errorMessage').textContent = '';
     updateDisplay();
 }
+
 
 function storeValue(value) {
     if (!numberEntered && (value === '+' || value === '-' || value === '*' || value === '/')) {
