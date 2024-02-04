@@ -1,3 +1,5 @@
+let numberButtons = document.querySelectorAll('.bg-number');
+let operatorButtons = document.querySelectorAll('.bg-operator');
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
@@ -81,7 +83,6 @@ function calculateResult() {
     document.querySelector('#firstNumberDisplay').textContent = `${firstNumber} ${operator} ${secondNumber}`;
     document.querySelector('#operatorDisplay').textContent = '=';
     document.querySelector('#secondNumberDisplay').textContent = result;
-    document.querySelector('#secondNumberDisplay').classList.remove('text-sm');
     firstNumber = result;
     secondNumber = '';
     operator = '';
@@ -322,3 +323,24 @@ document.addEventListener('keydown', function(event) {
         removeSelectedButtons();
     }
 });
+
+for(let i = 0; i < numberButtons.length; i++) {
+    numberButtons[i].addEventListener('touchstart', function() {
+      this.classList.add('text-white');
+    });
+  
+    numberButtons[i].addEventListener('touchend', function() {
+      this.classList.remove('text-white');
+    });
+}
+
+for(let i = 0; i < operatorButtons.length; i++) {
+    operatorButtons[i].addEventListener('touchstart', function() {
+      this.classList.add('text-white');
+    });
+  
+    operatorButtons[i].addEventListener('touchend', function() {
+      this.classList.remove('text-white');
+    });
+}
+  

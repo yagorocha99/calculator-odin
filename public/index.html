@@ -24,47 +24,47 @@
         <!-- buttons -->
         <div class="grid grid-cols-4 gap-1 w-9/12 sm:w-9/12 mx-auto">
 
-            <button class="col-span-2 rounded-lg py-3 bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="col-span-2 rounded-lg py-3 bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             id="clear" value="C" onclick="storeValue('C')">AC</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="DEL" onclick="deleteLastDigit()">DEL</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             value="/" onclick="storeValue('/')">/</button>
             
-            <button class="rounded-lg py-3 bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-1" value="1" onclick="storeValue('1')">1</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-2" value="2" onclick="storeValue('2')">2</button>
-            <button class="rounded-lg  bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-3" value="3" onclick="storeValue('3')">3</button>
-            <button class="rounded-lg  bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg py-3 bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="1" onclick="storeValue('1')">1</button>
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="2" onclick="storeValue('2')">2</button>
+            <button class="rounded-lg  bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="3" onclick="storeValue('3')">3</button>
+            <button class="rounded-lg  bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             value="*" onclick="storeValue('*')">*</button>
             
-            <button class="rounded-lg py-3 bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-4" value="4" onclick="storeValue('4')">4</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-5" value="5" onclick="storeValue('5')">5</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-6" value="6" onclick="storeValue('6')">6</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg py-3 bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="4" onclick="storeValue('4')">4</button>
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="5" onclick="storeValue('5')">5</button>
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="6" onclick="storeValue('6')">6</button>
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             value="+" onclick="storeValue('+')">+</button>
             
-            <button class="rounded-lg py-3 bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-7" value="7" onclick="storeValue('7')">7</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-8" value="8" onclick="storeValue('8')">8</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-9" value="9" onclick="storeValue('9')">9</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg py-3 bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="7" onclick="storeValue('7')">7</button>
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="8" onclick="storeValue('8')">8</button>
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="9" onclick="storeValue('9')">9</button>
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="-" onclick="storeValue('-')">-</button>
             
-            <button class="rounded-lg py-3 bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg py-3 bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="." onclick="storeValue('.')">.</button>
-            <button class="rounded-lg bg-number transition hover:bg-nb-hover hover:text-white" 
-            type="button" id="number-0" value="0" onclick="storeValue('0')">0</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="0" onclick="storeValue('0')">0</button>
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             value="+/-" onclick="toggleSign()">+/-</button>
-            <button class="rounded-lg bg-operator transition hover:bg-op-hover hover:text-white" 
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="=" onclick="calculateResult()">=</button>
 
         </div>
