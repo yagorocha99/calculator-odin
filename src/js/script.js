@@ -326,21 +326,21 @@ document.addEventListener('keydown', function(event) {
 
 for(let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('touchstart', function() {
-      this.classList.add('text-white');
+      this.classList.add('nb-mobile');
     });
   
     numberButtons[i].addEventListener('touchend', function() {
-      this.classList.remove('text-white');
+      this.classList.remove('nb-mobile');
     });
 }
 
 for(let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener('touchstart', function() {
-      this.classList.add('text-white');
+      this.classList.add('op-mobile');
     });
   
     operatorButtons[i].addEventListener('touchend', function() {
-      this.classList.remove('text-white');
+      this.classList.remove('op-mobile');
     });
 }
   

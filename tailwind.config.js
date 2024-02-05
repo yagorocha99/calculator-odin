@@ -14,7 +14,6 @@ module.exports = {
         'background' : '#212227',
         'display' : '#BDD4E7',
         'calculator' : '#637074',
-        
       }
     },
   },

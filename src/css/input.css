@@ -5,3 +5,11 @@
     src: url("../fonts/calculator.ttf") format("ttf");
 }
 @tailwind utilities;
+
+.nb-mobile{
+    @apply bg-nb-hover text-white;
+}
+
+.op-mobile{
+    @apply bg-op-hover text-white;
+}
