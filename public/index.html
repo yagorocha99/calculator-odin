@@ -24,10 +24,12 @@
         <!-- buttons -->
         <div class="grid grid-cols-4 gap-1 w-9/12 mx-auto">
 
-            <button class="col-span-2 rounded-lg py-3 bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
+            <button class="rounded-lg py-3 bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             id="clear" value="C" onclick="storeValue('C')">AC</button>
             <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="DEL" onclick="deleteLastDigit()">DEL</button>
+            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
+            value="+/-" onclick="toggleSign()">+/-</button>
             <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             value="/" onclick="storeValue('/')">/</button>
             
@@ -58,12 +60,11 @@
             <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="-" onclick="storeValue('-')">-</button>
             
+            
+            <button class="col-span-2 rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
+            type="button" value="0" onclick="storeValue('0')">0</button>
             <button class="rounded-lg py-3 bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="." onclick="storeValue('.')">.</button>
-            <button class="rounded-lg bg-number transition md:hover:bg-nb-hover md:hover:text-white" 
-            type="button" value="0" onclick="storeValue('0')">0</button>
-            <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
-            value="+/-" onclick="toggleSign()">+/-</button>
             <button class="rounded-lg bg-operator transition md:hover:bg-op-hover md:hover:text-white" 
             type="button" value="=" onclick="calculateResult()">=</button>
 
