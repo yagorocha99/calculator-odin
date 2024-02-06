@@ -7,6 +7,8 @@ A JS calculator app, made with HTML, CSS and TailwindCSS framework, featuring a 
 - All Numbers
 - +/- = Shift
 - Operators / * - + =
+- DEL = Backspace
+- Clear (C) = C
 
 
 
