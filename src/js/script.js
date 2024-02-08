@@ -38,10 +38,19 @@ function operate(operator, a, b){
         return;
     }
 
-    if(operators.hasOwnProperty(operator)){
-        const result = operators[operator](a, b);
-        return result;
+    if (!operators.hasOwnProperty(operator)) return;
+
+    let result = operators[operator](a, b);
+    
+    if (Math.abs(result) < 1e-3 && Math.abs(result) > 0) {
+        return result.toExponential(3);
+    } 
+
+    if (result.toString().includes('.') && result.toString().split('.')[1].length > 10) {
+        return parseFloat(result.toFixed(4));
     }
+
+    return result;
 }
 
 

@@ -7,7 +7,7 @@
   "name": "calculator",
   "version": "1.0.0",
   "scripts": {
-    "dev":"tailwindcss -i ./src/css/input.css -o ./public/output.css --watch"
+    "dev": "tailwindcss -i ./src/css/input.css -o ./public/output.css --watch"
   },
   "keywords": [],
   "author": "",
